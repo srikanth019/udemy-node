@@ -9,6 +9,9 @@
     width: 20rem;
     max-width: 95%;
     margin: 1rem;
+    background-color: aquamarine;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
 
 .product__title {
