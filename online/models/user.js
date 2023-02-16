@@ -25,7 +25,7 @@ const mongoose = require('mongoose');
 userSchema.methods.addToCart = function(product) {
     const cartProductIndex = this.cart.items.findIndex(cp => {
         //DOUBT
-        return cp.productId == product._id.toString();
+        return cp.productId.toString() === product._id.toString();
     })
 
     let newQuantity = 1;
@@ -41,6 +41,16 @@ userSchema.methods.addToCart = function(product) {
 
     const updatedCart = { items: updatedCartItems };
     this.cart = updatedCart;
+    return this.save();
+}
+
+userSchema.methods.deleteItemFromCart = function(prodId) {
+    // console.log(this.cart.items);
+    console.log(prodId);
+    const updatedCartItems = this.cart.items.filter(item => {
+        return item.productId.toString() !== prodId.toString();
+    });
+    this.cart.items = updatedCartItems;
     return this.save();
 }
 
